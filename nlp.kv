@@ -1,0 +1,101 @@
+<Root>:
+    name: 'root'
+    text_input: text_input
+    text_query: text_query
+    boolean_solved_text: boolean_solved_text
+    tfidf_solved_text: tfidf_solved_text
+    vsm_solved_text: vsm_solved_text
+    bm35l_solved_text: bm35l_solved_text
+
+
+    GridLayout:
+        cols: 1
+        padding: 14
+        spacing: 5
+        GridLayout:
+            cols: 2
+            spacing: 10
+            Label:
+                text: '- STKI -'
+                size_hint: None, None
+                height: 50
+                width: 100
+            TextInput:
+                id: text_query
+                hint_text: 'Input Query'
+                size_hint_y: None
+                height: 50
+
+        TextInput:
+            id: text_input
+            hint_text: 'Isi File'
+            size_hint_y: None
+            height: 400
+            text: ''
+        GridLayout:
+            cols: 2
+            GridLayout:
+                rows: 2
+                GridLayout:
+                    cols: 1
+                    Button:
+                        text: 'OPEN'
+                        on_release: root.show_load()
+
+                GridLayout:
+                    cols: 4
+                    Button:
+                        text: 'BOOLEAN'
+                        on_release: root.BooleanButton()
+
+
+                    Button:
+                        text: 'TF-IDF'
+                        on_release: root.tfidfButton()
+
+
+                    Button:
+                        text: 'VSM'
+                        on_release: root.vsmButton()
+
+                    Button:
+                        text: 'BM25L'
+                        on_release: root.BM35LButton()
+            GridLayout:
+                rows: 4
+                TextInput:
+                    id: boolean_solved_text
+                    hint_text: 'Boolean Hasil ada disini'
+                    text: ""
+                TextInput:
+                    id: tfidf_solved_text
+                    hint_text: 'TF-IDF Hasil ada disini'
+                    text: ""
+                TextInput:
+                    id: vsm_solved_text
+                    hint_text: 'VSM Hasil ada disini'
+                    text: ""
+                TextInput:
+                    id: bm35l_solved_text
+                    hint_text: 'BM25L Hasil ada disini'
+                    text: ""
+<LoadDialog>:
+    BoxLayout:
+        size: root.size
+        pos: root.pos
+        orientation: "vertical"
+        FileChooserIconView:
+            id: filechooser
+            multiselect: True
+            path: 'C:/Users/BAYU WIRA/Documents/CODE/Python/STKI_3Method_Project'
+
+        BoxLayout:
+            size_hint_y: None
+            height: 30
+            Button:
+                text: "Cancel"
+                on_release: root.cancel()
+
+            Button:
+                text: "Load"
+                on_release: root.load(filechooser.path, filechooser.selection)
